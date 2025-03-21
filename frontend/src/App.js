@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import Song from './components/Song.js';
+import Album from './components/Album.js';
+
+const songs = [
+  'Next To Me',
+  'I Dont Know Why',
+  'Whatever It Takes',
+  'Believer',
+  'Walking the Wire',
+  'Rise Up'
+];
+
+const songsList = songs.map(songTitle => <li>{songTitle}</li>)
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Music App</h1>
+      <Song title={'Test'} />
+      <Album title={'Evolve'} songsList={songsList}></Album>
     </div>
   );
 }

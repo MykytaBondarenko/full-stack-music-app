@@ -1,4 +1,4 @@
-import './Album.css';
+import './Albums.css';
 
 export default function Album() {
     return (

@@ -9,6 +9,7 @@ const albumsRouter = require('./routers/albumsRouter');
 const songsRouter = require('./routers/songsRouter');
 
 const server = express();
+server.use(cors());
 const PORT = 5000;
 
 server.use(artistsRouter);

@@ -20,6 +20,7 @@ function App() {
       <h1>Music App</h1>
       <Song title={'Test'} />
       <Album title={'Evolve'} songsList={songsList}></Album>
+      <Artist></Artist>
     </div>
   );
 }

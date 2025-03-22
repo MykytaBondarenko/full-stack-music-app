@@ -1,6 +1,7 @@
 import './App.css';
 import Song from './components/Song.js';
 import Album from './components/Album.js';
+import Artist from './components/Artist.js';
 
 const songs = [
   'Next To Me',

@@ -1,6 +1,6 @@
-import './Album.css';
+import './Albums.css';
 
-export default function Album() {
+export default function Albums() {
     return (
         <div>
             <h4>Album: idk</h4>

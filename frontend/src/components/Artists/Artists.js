@@ -2,7 +2,7 @@ import './Artists.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Artist() {
+export default function Artists() {
     const [artistsData, setArtistsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

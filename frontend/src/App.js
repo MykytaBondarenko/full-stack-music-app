@@ -1,9 +1,11 @@
 import './App.css';
-import Song from './components/Song.js';
-import Album from './components/Album.js';
-import Artist from './components/Artist.js';
+import Song from './components/Song/Song.js';
+import Album from './components/Album/Album.js';
+import Artist from './components/Artist/Artist.js';
+import Home from './components/Home/Home.js';
+import NavBar from './components/NavBar/NavBar.js';
 
-const songs = [
+/*const songs = [
   'Next To Me',
   'I Dont Know Why',
   'Whatever It Takes',
@@ -12,15 +14,13 @@ const songs = [
   'Rise Up'
 ];
 
-const songsList = songs.map(songTitle => <li>{songTitle}</li>)
+const songsList = songs.map(songTitle => <li>{songTitle}</li>)*/
 
 function App() {
   return (
     <div className="App">
-      <h1>Music App</h1>
-      <Song title={'Test'} />
-      <Album title={'Evolve'} songsList={songsList}></Album>
-      <Artist></Artist>
+      <NavBar></NavBar>
+      <Home></Home>
     </div>
   );
 }

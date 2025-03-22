@@ -17,6 +17,22 @@ import NavBar from './components/NavBar/NavBar.js';
 const songsList = songs.map(songTitle => <li>{songTitle}</li>)*/
 
 function App() {
+  let CurrentPage;
+  switch (window.location.pathname) {
+    case '/':
+      CurrentPage = Home;
+      break;
+    case '/artists':
+      CurrentPage = Artists;
+      break;
+    case '/albums':
+      CurrentPage = Albums;
+      break;
+    case '/songs':
+      CurrentPage = Songs;
+      break;
+  }
+
   return (
     <div className="App">
       <NavBar></NavBar>

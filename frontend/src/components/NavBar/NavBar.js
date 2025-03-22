@@ -5,11 +5,21 @@ export default function NavBar() {
         <nav class="navbar">
             <a href="/" id="sitetitle">Music&You</a>
             <ul>
-                <li className="active"><a href="/artists">Home</a></li>
-                <li><a href="/artists">Artists</a></li>
-                <li><a href="/albums">Albums</a></li>
-                <li><a href="/songs">Songs</a></li>
+                <CustomLink href="/">Home</CustomLink>
+                <CustomLink href="/artists">Artists</CustomLink>
+                <CustomLink href="/albums">Albums</CustomLink>
+                <CustomLink href="/songs">Songs</CustomLink>
             </ul>
         </nav>
+    );
+}
+
+function CustomLink({ href, children, ...props }) {
+    const path = window.location.pathname;
+
+    return (
+        <li className={path === href ? "active" : ""}>
+            <a href={href} {...props}>{children}</a>
+        </li>
     );
 }

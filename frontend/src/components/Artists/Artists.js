@@ -113,22 +113,26 @@ export default function Artists() {
 
     let artistsList;
     if (artistsData.length < 1) artistsList = "Couldn't find the artist";
-    else artistsList = artistsData.map(artist => <li>Artist: {artist.name}
-                                                        <ul>
-                                                            <li>Monthly listeners: {artist.monthly_listeners.toLocaleString()}</li>
-                                                            <li>Genre: {artist.genre}</li>
-                                                        </ul>
+    else artistsList = artistsData.map(artist => <li class="artistBox">{artist.name}
+                                                        <p>Monthly listeners: {artist.monthly_listeners.toLocaleString()}</p>
+                                                        <p>Genre: {artist.genre}</p>
                                                         <button onClick={() => updateArtist(artist)}>Update</button>
                                                         <button onClick={() => deleteArtist(artist.id)}>Delete</button>
                                                     </li>);
 
     return (
         <div>
-            <input type='text' id='artistName'></input>
-            <button onClick={() => fetchArtist(document.getElementById('artistName').value)}>Search artist</button>
-            <button onClick={() => createArtist()}>Create a new artist</button>
-            <h3>Artists:</h3>
-            <ul>{artistsList}</ul>
+            <h1>Artists</h1>
+            <div id="inputDiv">
+                <div>
+                    <input type='text' id='artistName' placeholder="Artist's Name" class="findArtist"></input>
+                    <button onClick={() => fetchArtist(document.getElementById('artistName').value)} class="findArtist">Search artist</button>
+                </div>
+                <div>
+                    <button onClick={() => createArtist()} class="createArtist">Add a new artist</button>
+                </div>
+            </div>
+            <ul id="artistsUL">{artistsList}</ul>
         </div>
     );
 }

@@ -1,0 +1,86 @@
+h1{
+    text-align:center;
+    font-size: 50px;
+}
+
+#inputDiv{
+    display:flex;
+    justify-content: space-between;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#inputDiv button {
+    background-color: forestgreen;
+    color: white;
+    height: 100%;
+    border:none;
+    padding: 5px 10px 5px 10px;
+    transition: 0.1s;
+}
+
+#inputDiv button:hover {
+    background-color: darkgreen;
+}
+
+#inputDiv button:active {
+    background-color: limegreen;
+}
+
+.findArtist {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-family: 'Monaco';
+}
+
+.createArtist {
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-family: 'Monaco';
+}
+
+#artistsUL {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: 40px;
+}
+
+.artistBox {
+    list-style: none;
+    background-color: rgb(46, 46, 46);
+    border-radius: 10px;
+    width: 22%;
+    padding: 1%;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.artistBox p{
+    list-style: none;
+    font-family: 'Monaco';
+    font-size: 20px;
+}
+
+.artistBox button {
+    background-color: forestgreen;
+    color: white;
+    border:none;
+    font-family: 'Monaco';
+    font-size: 20px;
+    margin: 0px 10px 0px 10px;
+    padding: 5px 10px 5px 10px;
+    transition: 0.1s;
+}
+
+.artistBox button:hover {
+    background-color: darkgreen;
+}
+
+.artistBox button:active {
+    background-color: limegreen;
+}

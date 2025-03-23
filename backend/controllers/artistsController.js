@@ -26,19 +26,32 @@ exports.getArtistData = (req, res) => {
                 res.send(error);
             } else {
                 const rows = JSON.parse(JSON.stringify(result));
-                if (rows.length == 0) {
-                    console.log("Couldn't find this artist :(")
-                    res.send("Couldn't find this artist :(")
-                } else {
-                    console.log(rows);
-                    res.send(rows);
-                }
+                console.log(rows);
+                res.send(rows);
             }
     });
 }
 
 exports.createArtistData = (req, res) => {
-    res.status(201).send("Post Artist");
+    const data = req.body;
+    const name = data.name;
+    const monthly_listeners = data.monthly_listeners;
+    const genre = data.genre;
+    const songs = data.songs;
+    const albums = data.albums;
+
+    console.log("INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,'" + name + "'," + monthly_listeners + ",'" + genre + "','" + songs + "','" + albums + "')");
+    db.query(
+        "INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,'" + name + "'," + monthly_listeners + ",'" + genre + "','" + songs + "','" + albums + "')",
+        function(error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.status(201).send(result);
+            }
+    });
 }
 
 exports.updateArtistData = (req, res) => {

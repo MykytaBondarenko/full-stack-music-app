@@ -1,5 +1,7 @@
 const express = require('express');
 const server = express.Router();
+const cors = require('cors');
+server.use(cors());
 const artistsController = require('../controllers/artistsController');
 
 server.get("/artists", artistsController.getAllArtistsData);

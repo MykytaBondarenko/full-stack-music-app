@@ -39,10 +39,15 @@ export default function Artists() {
 
     function createArtist() {
         const name = prompt('Enter the name of your artist: ');
+        if (!name) return;
         const monthly_listeners = prompt('Enter number of monthly listeners of ' + name + ': ');
+        if (!monthly_listeners) return;
         const genre = prompt('Enter genre of ' + name + ': ');
-        const songs = prompt('Enter songs of ' + name + ': (in JSON format)');
-        const albums = prompt('Enter albums of ' + name + ': (in JSON format)');
+        if (!genre) return;
+        const songs = prompt('Enter songs of ' + name + ': (in JSON format)', "{\"songs\":[\"song1\",\"song2\",\"song3\"]}");
+        if (!songs) return;
+        const albums = prompt('Enter albums of ' + name + ': (in JSON format)', "{\"albums\":[\"album1\",\"album2\",\"album3\"]}");
+        if (!albums) return;
 
         axios
             .post("http://localhost:5000/artists", {
@@ -52,6 +57,48 @@ export default function Artists() {
                 songs: songs,
                 albums: albums
             })
+            .then((response) => {
+                console.log(response);
+                fetchAllArtists();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    function updateArtist(artist) {
+        const name = prompt("Enter the new name for this artist: ", artist.name);
+        if (!name) return;
+        const monthly_listeners = prompt("Enter the new number of monthly listeners for " + name + ": ", artist.monthly_listeners);
+        if (!monthly_listeners) return;
+        const genre = prompt("Enter the new genre of " + name + ": ", artist.genre);
+        if (!genre) return;
+        const songs = prompt("Enter the new songs of " + name + ": (in JSON format)", artist.songs);
+        if (!songs) return;
+        const albums = prompt("Enter the new albums of " + name + ": (in JSON format)", artist.albums);
+        if (!albums) return;
+
+        axios
+            .put("http://localhost:5000/artists", {
+                id: artist.id,
+                name: name,
+                monthly_listeners: monthly_listeners,
+                genre: genre,
+                songs: songs,
+                albums: albums
+            })
+            .then((response) => {
+                console.log(response);
+                fetchAllArtists();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
+    function deleteArtist(artistID) {
+        axios
+            .delete('http://localhost:5000/artists/' + artistID)
             .then((response) => {
                 console.log(response);
                 fetchAllArtists();
@@ -71,8 +118,8 @@ export default function Artists() {
                                                             <li>Monthly listeners: {artist.monthly_listeners.toLocaleString()}</li>
                                                             <li>Genre: {artist.genre}</li>
                                                         </ul>
-                                                        <button>Update</button>
-                                                        <button>Delete</button>
+                                                        <button onClick={() => updateArtist(artist)}>Update</button>
+                                                        <button onClick={() => deleteArtist(artist.id)}>Delete</button>
                                                     </li>);
 
     return (

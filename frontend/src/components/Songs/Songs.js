@@ -42,13 +42,20 @@ export default function Songs() {
     }
 
     function createSong() {
+        let availableAlbumsIDs = "";
+        for (let i = 0; i < albumsData.length; i++) {
+            availableAlbumsIDs += (albumsData[i].album_title + ": " + albumsData[i].id + ", ");
+        }
+        availableAlbumsIDs = availableAlbumsIDs.substring(0, availableAlbumsIDs.length - 2);
+
         const title = prompt('Enter the title of your song: ');
         if (!title) return;
         const song_release_year = prompt('Enter the release year of ' + title + ': ');
         if (!song_release_year) return;
-        const album_id = prompt('Enter the album_id of ' + title + ': ');
+        const album_id = prompt('Enter the album_id of ' + title + ': (available albums IDs are ' + availableAlbumsIDs + ')');
         if (!album_id) return;
-        const artist_id = prompt('Enter artist_id of ' + title + ': ');
+        const artist_id = findArtistIDByAlbumID(album_id);
+        console.log(artist_id);
         if (!artist_id) return;
 
         axios
@@ -148,6 +155,16 @@ export default function Songs() {
             }
         }
         return "Unknown album";
+    }
+
+    function findArtistIDByAlbumID(albumID) {
+        let artistID;
+        for (let i = 0; i < albumsData.length; i++) {
+            if (albumsData[i].id == albumID) {
+                return albumsData[i].artist_id;
+            }
+        }
+        return -1;
     }
 
     if (loading) return (<div>Loading...</div>);

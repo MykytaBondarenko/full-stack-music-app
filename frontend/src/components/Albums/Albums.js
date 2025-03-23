@@ -40,9 +40,15 @@ export default function Albums() {
     }
 
     function createAlbum() {
+        let availableArtistIDs = "";
+        for (let i = 0; i < artistsData.length; i++) {
+            availableArtistIDs += (artistsData[i].name + ": " + artistsData[i].id + ", ");
+        }
+        availableArtistIDs = availableArtistIDs.substring(0, availableArtistIDs.length - 2);
+
         const title = prompt('Enter the title of your album: ');
         if (!title) return;
-        const artist_id = prompt('Enter the artist_id of ' + title + ': ');
+        const artist_id = prompt('Enter the artist_id of ' + title + ': (available IDs: ' + availableArtistIDs + ")");
         if (!artist_id) return;
         const album_release_year = prompt('Enter the release year of ' + title + ': ');
         if (!album_release_year) return;

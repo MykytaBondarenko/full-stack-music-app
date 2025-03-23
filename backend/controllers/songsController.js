@@ -26,25 +26,68 @@ exports.getSongData = (req, res) => {
                 res.send(error);
             } else {
                 const rows = JSON.parse(JSON.stringify(result));
-                if (rows.length == 0) {
-                    console.log("Couldn't find this song :(")
-                    res.send("Couldn't find this song :(")
-                } else {
-                    console.log(rows);
-                    res.send(rows);
-                }
+                console.log(rows);
+                res.send(rows);
             }
     });
 }
 
 exports.createSongData = (req, res) => {
-    res.status(201).send("Post Song");
+    const data = req.body;
+    const title = data.song_title;
+    const song_release_year = data.song_release_year;
+    const album_id = data.album_id;
+    const artist_id = data.artist_id;
+
+    console.log("INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,'" + title + "'," + song_release_year + "," + album_id + "," + artist_id + ")");
+    db.query(
+        "INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,'" + title + "'," + song_release_year + "," + album_id + "," + artist_id + ")",
+        function(error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.status(201).send(result);
+            }
+    });
 }
 
 exports.updateSongData = (req, res) => {
-    res.status(200).send("Put Song");
+    const data = req.body;
+    const id = data.id;
+    const title = data.song_title;
+    const song_release_year = data.song_release_year;
+    const album_id = data.album_id;
+    const artist_id = data.artist_id;
+
+    console.log("UPDATE Songs SET id=" + id + ",song_title='" + title + "',song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id);
+    db.query(
+        "UPDATE Songs SET id=" + id + ",song_title='" + title + "',song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.status(200).send(result);
+            }
+    });
 }
 
 exports.deleteSongData = (req, res) => {
-    res.status(200).send("Delete Song");
+    const id = req.params.songID;
+
+    db.query(
+        "DELETE FROM Songs WHERE Songs.id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.send(result);
+            }
+        }
+    )
 }

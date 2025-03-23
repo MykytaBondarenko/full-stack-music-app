@@ -6,6 +6,6 @@ server.get("/songs", songsController.getAllSongsData);
 server.get("/songs/:songTitle", songsController.getSongData);
 server.post("/songs/", songsController.createSongData);
 server.put("/songs", songsController.updateSongData);
-server.delete("/songs", songsController.deleteSongData);
+server.delete("/songs/:songID", songsController.deleteSongData);
 
 module.exports = server;

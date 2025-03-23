@@ -6,6 +6,6 @@ server.get("/albums", albumsController.getAllAlbumsData);
 server.get("/albums/:albumTitle", albumsController.getAlbumData);
 server.post("/albums/", albumsController.createAlbumData);
 server.put("/albums", albumsController.updateAlbumData);
-server.delete("/albums", albumsController.deleteAlbumData);
+server.delete("/albums/:albumID", albumsController.deleteAlbumData);
 
 module.exports = server;

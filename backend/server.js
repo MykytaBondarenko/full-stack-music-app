@@ -1,6 +1,7 @@
 // Packages
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Routers
@@ -10,6 +11,7 @@ const songsRouter = require('./routers/songsRouter');
 
 const server = express();
 server.use(cors());
+server.use(bodyParser.json());
 const PORT = 5000;
 
 server.use(artistsRouter);

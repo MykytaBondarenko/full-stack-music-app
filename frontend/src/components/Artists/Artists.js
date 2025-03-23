@@ -54,6 +54,7 @@ export default function Artists() {
             })
             .then((response) => {
                 console.log(response);
+                fetchAllArtists();
             })
             .catch((error) => {
                 console.log(error);

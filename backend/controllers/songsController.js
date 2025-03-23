@@ -19,7 +19,7 @@ exports.getAllSongsData = (req, res) => {
 exports.getSongData = (req, res) => {
     const title = req.params.songTitle;
     db.query(
-        "SELECT * FROM Songs WHERE song_title='" + title + "'",
+        "SELECT * FROM Songs WHERE song_title=\"" + title + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -39,9 +39,9 @@ exports.createSongData = (req, res) => {
     const album_id = data.album_id;
     const artist_id = data.artist_id;
 
-    console.log("INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,'" + title + "'," + song_release_year + "," + album_id + "," + artist_id + ")");
+    console.log("INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,\"" + title + "\"," + song_release_year + "," + album_id + "," + artist_id + ")");
     db.query(
-        "INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,'" + title + "'," + song_release_year + "," + album_id + "," + artist_id + ")",
+        "INSERT INTO Songs (id, song_title, song_release_year, album_id, artist_id) VALUES (null,\"" + title + "\"," + song_release_year + "," + album_id + "," + artist_id + ")",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -61,9 +61,9 @@ exports.updateSongData = (req, res) => {
     const album_id = data.album_id;
     const artist_id = data.artist_id;
 
-    console.log("UPDATE Songs SET id=" + id + ",song_title='" + title + "',song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id);
+    console.log("UPDATE Songs SET id=" + id + ",song_title=\"" + title + "\",song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id);
     db.query(
-        "UPDATE Songs SET id=" + id + ",song_title='" + title + "',song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id,
+        "UPDATE Songs SET id=" + id + ",song_title=\"" + title + "\",song_release_year=" + song_release_year + ",album_id=" + album_id + ",artist_id=" + artist_id + " WHERE id=" + id,
         function (error, result) {
             if (error) {
                 console.log(error);

@@ -19,7 +19,7 @@ exports.getAllAlbumsData = (req, res) => {
 exports.getAlbumData = (req, res) => {
     const title = req.params.albumTitle;
     db.query(
-        "SELECT * FROM Albums WHERE album_title='" + title + "'",
+        "SELECT * FROM Albums WHERE album_title=\"" + title + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -40,9 +40,9 @@ exports.createAlbumData = (req, res) => {
     const listens = data.listens;
     const songs = data.songs;
 
-    console.log("INSERT INTO Albums (id, album_title, artist_id, album_release_year, listens, songs) VALUES (null,'" + title + "'," + artist_id + "," + album_release_year + "," + listens + ",'" + songs + "')");
+    console.log("INSERT INTO Albums (id, album_title, artist_id, album_release_year, listens, songs) VALUES (null,\"" + title + "\"," + artist_id + "," + album_release_year + "," + listens + ",'" + songs + "')");
     db.query(
-        "INSERT INTO Albums (id, album_title, artist_id, album_release_year, listens, songs) VALUES (null,'" + title + "'," + artist_id + "," + album_release_year + "," + listens + ",'" + songs + "')",
+        "INSERT INTO Albums (id, album_title, artist_id, album_release_year, listens, songs) VALUES (null,\"" + title + "\"," + artist_id + "," + album_release_year + "," + listens + ",'" + songs + "')",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -63,9 +63,9 @@ exports.updateAlbumData = (req, res) => {
     const listens = data.listens;
     const songs = data.songs;
 
-    console.log("UPDATE Albums SET id=" + id + ",album_title='" + title + "',artist_id=" + artist_id + ",album_release_year=" + album_release_year + ",listens=" + listens + ",songs='" + songs + "' WHERE id=" + id);
+    console.log("UPDATE Albums SET id=" + id + ",album_title=\"" + title + "\",artist_id=" + artist_id + ",album_release_year=" + album_release_year + ",listens=" + listens + ",songs='" + songs + "' WHERE id=" + id);
     db.query(
-        "UPDATE Albums SET id=" + id + ",album_title='" + title + "',artist_id=" + artist_id + ",album_release_year=" + album_release_year + ",listens=" + listens + ",songs='" + songs + "' WHERE id=" + id,
+        "UPDATE Albums SET id=" + id + ",album_title=\"" + title + "\",artist_id=" + artist_id + ",album_release_year=" + album_release_year + ",listens=" + listens + ",songs='" + songs + "' WHERE id=" + id,
         function (error, result) {
             if (error) {
                 console.log(error);

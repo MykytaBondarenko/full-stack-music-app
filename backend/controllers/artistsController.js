@@ -32,6 +32,23 @@ exports.getArtistData = (req, res) => {
     });
 }
 
+exports.getArtistDataByID = (req, res) => {
+    const id = req.params.artistID;
+    db.query(
+        "SELECT * FROM Artists WHERE id=" + id,
+        function(error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                const rows = JSON.parse(JSON.stringify(result));
+                console.log(rows);
+                res.send(rows);
+            }
+        }
+    )
+}
+
 exports.createArtistData = (req, res) => {
     const data = req.body;
     const name = data.name;

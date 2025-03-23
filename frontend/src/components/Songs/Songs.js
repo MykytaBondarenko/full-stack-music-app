@@ -6,9 +6,13 @@ export default function Songs() {
     const [songsData, setSongsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [artistsData, setArtistsData] = useState([]);
+    const [albumsData, setAlbumsData] = useState([]);
 
     useEffect( () => {
         fetchAllSongs();
+        fetchAllArtists();
+        fetchAllAlbums();
     }, []);
 
     function fetchAllSongs() {
@@ -102,6 +106,50 @@ export default function Songs() {
             })
     }
 
+    function fetchAllArtists() {
+        axios
+            .get("http://localhost:5000/artists")
+            .then((response) => {
+                setArtistsData(response.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }
+
+    function fetchAllAlbums() {
+        axios
+            .get("http://localhost:5000/albums")
+            .then((response) => {
+                setAlbumsData(response.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }
+
+    function findArtistNameByData(artistID) {
+        for (let i = 0; i < artistsData.length; i++) {
+            if (artistsData[i].id == artistID) {
+                return artistsData[i].name;
+            }
+        }
+        return "Unknown artist";
+    }
+
+    function findAlbumTitleByData(albumID) {
+        for (let i = 0; i < albumsData.length; i++) {
+            if (albumsData[i].id == albumID) {
+                return albumsData[i].album_title;
+            }
+        }
+        return "Unknown album";
+    }
+
     if (loading) return (<div>Loading...</div>);
     if (error) return (<div>Error: {error}</div>);
 
@@ -109,8 +157,8 @@ export default function Songs() {
     if (songsData.length < 1) songsList = "Couldn't find the song";
     else songsList = songsData.map(song => <li class="songBox">{song.song_title}
                                                         <p>Release year: {song.song_release_year}</p>
-                                                        <p>Album_id: {song.album_id}</p>
-                                                        <p>Artist_id: {song.artist_id}</p>
+                                                        <p>Album: {findAlbumTitleByData(song.album_id)}</p>
+                                                        <p>Artist: {findArtistNameByData(song.artist_id)}</p>
                                                         <button onClick={() => updateSong(song)}>Update</button>
                                                         <button onClick={() => deleteSong(song.id)}>Delete</button>
                                                     </li>);

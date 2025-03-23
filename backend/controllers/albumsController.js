@@ -32,6 +32,23 @@ exports.getAlbumData = (req, res) => {
     });
 }
 
+exports.getAlbumDataByID = (req, res) => {
+    const id = req.params.albumID;
+    db.query(
+        "SELECT * FROM Albums WHERE id=" + id,
+        function(error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                const rows = JSON.parse(JSON.stringify(result));
+                console.log(rows);
+                res.send(rows);
+            }
+        }
+    )
+}
+
 exports.createAlbumData = (req, res) => {
     const data = req.body;
     const title = data.album_title;

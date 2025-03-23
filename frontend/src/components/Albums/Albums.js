@@ -6,9 +6,11 @@ export default function Albums() {
     const [albumsData, setAlbumsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [artistsData, setArtistsData] = useState([]);
 
     useEffect( () => {
         fetchAllAlbums();
+        fetchAllArtists();
     }, []);
 
     function fetchAllAlbums() {
@@ -108,13 +110,35 @@ export default function Albums() {
             })
     }
 
+    function fetchAllArtists() {
+        axios
+            .get("http://localhost:5000/artists")
+            .then((response) => {
+                setArtistsData(response.data);
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }
+
+    function findArtistNameByData(artistID) {
+        for (let i = 0; i < artistsData.length; i++) {
+            if (artistsData[i].id == artistID) {
+                return artistsData[i].name;
+            }
+        }
+        return "Unknown artist";
+    }
+
     if (loading) return (<div>Loading...</div>);
     if (error) return (<div>Error: {error}</div>);
 
     let albumsList;
     if (albumsData.length < 1) albumsList = "Couldn't find the album";
     else albumsList = albumsData.map(album => <li class="albumBox">{album.album_title}
-                                                        <p>Artist_id: {album.artist_id}</p>
+                                                        <p>Artist: {findArtistNameByData(album.artist_id)}</p>
                                                         <p>Release year: {album.album_release_year}</p>
                                                         <p>Listens: {album.listens.toLocaleString()}</p>
                                                         <button onClick={() => updateAlbum(album)}>Update</button>

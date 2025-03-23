@@ -55,7 +55,26 @@ exports.createArtistData = (req, res) => {
 }
 
 exports.updateArtistData = (req, res) => {
-    res.status(200).send("Put Artist");
+    const data = req.body;
+    const id = data.id;
+    const name = data.name;
+    const monthly_listeners = data.monthly_listeners;
+    const genre = data.genre;
+    const songs = data.songs;
+    const albums = data.albums;
+
+    console.log("UPDATE Artists SET id=" + id + ",name='" + name + "',monthly_listeners=" + monthly_listeners + ",genre='" + genre + "',songs='" + songs + "',albums='" + albums + "' WHERE id=" + id);
+    db.query(
+        "UPDATE Artists SET id=" + id + ",name='" + name + "',monthly_listeners=" + monthly_listeners + ",genre='" + genre + "',songs='" + songs + "',albums='" + albums + "' WHERE id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.status(200).send(result);
+            }
+    });
 }
 
 exports.deleteArtistData = (req, res) => {

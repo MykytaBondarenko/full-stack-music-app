@@ -19,7 +19,7 @@ exports.getAllArtistsData = (req, res) => {
 exports.getArtistData = (req, res) => {
     const name = req.params.artistName;
     db.query(
-        "SELECT * FROM Artists WHERE name='" + name + "'",
+        "SELECT * FROM Artists WHERE name=\"" + name + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -40,9 +40,9 @@ exports.createArtistData = (req, res) => {
     const songs = data.songs;
     const albums = data.albums;
 
-    console.log("INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,'" + name + "'," + monthly_listeners + ",'" + genre + "','" + songs + "','" + albums + "')");
+    console.log("INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,\"" + name + "\"," + monthly_listeners + ",\"" + genre + "\",'" + songs + "','" + albums + "')");
     db.query(
-        "INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,'" + name + "'," + monthly_listeners + ",'" + genre + "','" + songs + "','" + albums + "')",
+        "INSERT INTO Artists (id, name, monthly_listeners, genre, songs, albums) VALUES (null,\"" + name + "\"," + monthly_listeners + ",\"" + genre + "\",'" + songs + "','" + albums + "')",
         function(error, result) {
             if (error) {
                 console.log(error);
@@ -63,9 +63,9 @@ exports.updateArtistData = (req, res) => {
     const songs = data.songs;
     const albums = data.albums;
 
-    console.log("UPDATE Artists SET id=" + id + ",name='" + name + "',monthly_listeners=" + monthly_listeners + ",genre='" + genre + "',songs='" + songs + "',albums='" + albums + "' WHERE id=" + id);
+    console.log("UPDATE Artists SET id=" + id + ",name=\"" + name + "\",monthly_listeners=" + monthly_listeners + ",genre=\"" + genre + "\",songs='" + songs + "',albums='" + albums + "' WHERE id=" + id);
     db.query(
-        "UPDATE Artists SET id=" + id + ",name='" + name + "',monthly_listeners=" + monthly_listeners + ",genre='" + genre + "',songs='" + songs + "',albums='" + albums + "' WHERE id=" + id,
+        "UPDATE Artists SET id=" + id + ",name=\"" + name + "\",monthly_listeners=" + monthly_listeners + ",genre=\"" + genre + "\",songs='" + songs + "',albums='" + albums + "' WHERE id=" + id,
         function (error, result) {
             if (error) {
                 console.log(error);

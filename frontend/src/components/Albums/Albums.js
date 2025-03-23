@@ -113,23 +113,27 @@ export default function Albums() {
 
     let albumsList;
     if (albumsData.length < 1) albumsList = "Couldn't find the album";
-    else albumsList = albumsData.map(album => <li>Album: {album.album_title}
-                                                        <ul>
-                                                            <li>Artist_id: {album.artist_id}</li>
-                                                            <li>Release year: {album.album_release_year}</li>
-                                                            <li>Listens: {album.listens}</li>
-                                                        </ul>
+    else albumsList = albumsData.map(album => <li class="albumBox">{album.album_title}
+                                                        <p>Artist_id: {album.artist_id}</p>
+                                                        <p>Release year: {album.album_release_year}</p>
+                                                        <p>Listens: {album.listens.toLocaleString()}</p>
                                                         <button onClick={() => updateAlbum(album)}>Update</button>
                                                         <button onClick={() => deleteAlbum(album.id)}>Delete</button>
                                                     </li>);
 
     return (
         <div>
-            <input type='text' id='albumTitle'></input>
-            <button onClick={() => fetchAlbum(document.getElementById('albumTitle').value)}>Search album</button>
-            <button onClick={() => createAlbum()}>Create a new album</button>
-            <h3>Albums:</h3>
-            <ul>{albumsList}</ul>
+            <h1>Albums:</h1>
+            <div id="inputDiv">
+                <div>
+                    <input type='text' id='albumTitle' placeholder="Albums's Title" class="findAlbum"></input>
+                    <button onClick={() => fetchAlbum(document.getElementById('albumTitle').value)} class="findAlbum">Search album</button>
+                </div>
+                <div>
+                    <button onClick={() => createAlbum()} class="createAlbum">Add a new album</button>
+                </div>
+            </div>
+            <ul id="albumsUL">{albumsList}</ul>
         </div>
     );
 }

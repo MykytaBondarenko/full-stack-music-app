@@ -19,7 +19,7 @@ exports.getAllArtistsData = (req, res) => {
 exports.getArtistData = (req, res) => {
     const name = req.params.artistName;
     db.query(
-        "SELECT * FROM Artists WHERE name=\"" + name + "\"",
+        "SELECT * FROM Artists WHERE name REGEXP \"" + name + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);

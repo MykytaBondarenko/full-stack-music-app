@@ -19,7 +19,7 @@ exports.getAllSongsData = (req, res) => {
 exports.getSongData = (req, res) => {
     const title = req.params.songTitle;
     db.query(
-        "SELECT * FROM Songs WHERE song_title=\"" + title + "\"",
+        "SELECT * FROM Songs WHERE song_title REGEXP \"" + title + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);

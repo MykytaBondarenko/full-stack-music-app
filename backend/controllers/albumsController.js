@@ -19,7 +19,7 @@ exports.getAllAlbumsData = (req, res) => {
 exports.getAlbumData = (req, res) => {
     const title = req.params.albumTitle;
     db.query(
-        "SELECT * FROM Albums WHERE album_title=\"" + title + "\"",
+        "SELECT * FROM Albums WHERE album_title REGEXP \"" + title + "\"",
         function(error, result) {
             if (error) {
                 console.log(error);

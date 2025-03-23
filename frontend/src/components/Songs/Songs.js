@@ -107,23 +107,27 @@ export default function Songs() {
 
     let songsList;
     if (songsData.length < 1) songsList = "Couldn't find the song";
-    else songsList = songsData.map(song => <li>Song: {song.song_title}
-                                                        <ul>
-                                                            <li>Release year: {song.song_release_year}</li>
-                                                            <li>Album_id: {song.album_id}</li>
-                                                            <li>Artist_id: {song.artist_id}</li>
-                                                        </ul>
+    else songsList = songsData.map(song => <li class="songBox">{song.song_title}
+                                                        <p>Release year: {song.song_release_year}</p>
+                                                        <p>Album_id: {song.album_id}</p>
+                                                        <p>Artist_id: {song.artist_id}</p>
                                                         <button onClick={() => updateSong(song)}>Update</button>
                                                         <button onClick={() => deleteSong(song.id)}>Delete</button>
                                                     </li>);
 
     return (
         <div>
-            <input type='text' id='songTitle'></input>
-            <button onClick={() => fetchSong(document.getElementById('songTitle').value)}>Search song</button>
-            <button onClick={() => createSong()}>Create a new song</button>
-            <h3>Songs:</h3>
-            <ul>{songsList}</ul>
+            <h1>Songs:</h1>
+            <div id="inputDiv">
+                <div>
+                    <input type='text' id='songTitle' placeholder="Song's Title" class="findSong"></input>
+                    <button onClick={() => fetchSong(document.getElementById('songTitle').value)} class="findSong">Search song</button>
+                </div>
+                <div>
+                    <button onClick={() => createSong()} class="createSong">Add a new song</button>
+                </div>
+            </div>
+            <ul id="songsUL">{songsList}</ul>
         </div>
     );
 }

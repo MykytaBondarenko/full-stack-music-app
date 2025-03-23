@@ -96,6 +96,18 @@ export default function Artists() {
             })
     }
 
+    function deleteArtist(artistID) {
+        axios
+            .delete('http://localhost:5000/artists/' + artistID)
+            .then((response) => {
+                console.log(response);
+                fetchAllArtists();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+
     if (loading) return (<div>Loading...</div>);
     if (error) return (<div>Error: {error}</div>);
 
@@ -107,7 +119,7 @@ export default function Artists() {
                                                             <li>Genre: {artist.genre}</li>
                                                         </ul>
                                                         <button onClick={() => updateArtist(artist)}>Update</button>
-                                                        <button>Delete</button>
+                                                        <button onClick={() => deleteArtist(artist.id)}>Delete</button>
                                                     </li>);
 
     return (

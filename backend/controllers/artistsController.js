@@ -78,5 +78,42 @@ exports.updateArtistData = (req, res) => {
 }
 
 exports.deleteArtistData = (req, res) => {
-    res.status(200).send("Delete Artist");
+    const id = req.params.artistID;
+
+    console.log("DELETE Songs FROM Songs INNER JOIN Artists ON Artists.id=Songs.artist_id WHERE Artists.id=" + id);
+    console.log("DELETE Albums FROM Albums INNER JOIN Artists ON Artists.id=Albums.artist_id WHERE Artists.id=" + id);
+    console.log("DELETE FROM Artists WHERE Artists.id=" + id);
+    db.query(
+        "DELETE Songs FROM Songs INNER JOIN Artists ON Artists.id=Songs.artist_id WHERE Artists.id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+            }
+        }
+    )
+    db.query(
+        "DELETE Albums FROM Albums INNER JOIN Artists ON Artists.id=Albums.artist_id WHERE Artists.id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+            }
+    });
+    db.query(
+        "DELETE FROM Artists WHERE Artists.id=" + id,
+        function (error, result) {
+            if (error) {
+                console.log(error);
+                res.send(error);
+            } else {
+                console.log(result);
+                res.send(result);
+            }
+        }
+    )
 }

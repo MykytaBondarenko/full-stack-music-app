@@ -8,6 +8,6 @@ server.get("/artists", artistsController.getAllArtistsData);
 server.get("/artists/:artistName", artistsController.getArtistData);
 server.post("/artists/", artistsController.createArtistData);
 server.put("/artists", artistsController.updateArtistData);
-server.delete("/artists", artistsController.deleteArtistData);
+server.delete("/artists/:artistID", artistsController.deleteArtistData);
 
 module.exports = server;
